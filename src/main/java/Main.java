@@ -17,6 +17,7 @@ class App {
         int lastNo = 0;
         String contents = "";
         String authorList = "";
+        WiseSaying wiseSaying = new WiseSaying();
 
         while (true) {
             System.out.print("명령) ");
@@ -33,17 +34,29 @@ class App {
                 System.out.print("작가 : ");
                 authorList = scanner.nextLine();
 
-                System.out.println("%d번 명언이 등록되었습니다.".formatted(++lastNo));
+                wiseSaying.id = ++lastNo;
+                wiseSaying.content = contents;
+                wiseSaying.author = authorList;
+
+                System.out.println("%d번 명언이 등록되었습니다.".formatted(lastNo));
 
             } else if (command.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-                for (int i = 0; i < lastNo; i++) {
-                    System.out.println("%d / %s / %s".formatted(lastNo, authorList, contents));
+                System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+
+                for (int i = lastNo; i >= 0; i--) {
+                    System.out.println("%d / %s / %s".formatted(i, authorList, contents));
                 }
 
             }
         }
     }
+}
+
+class WiseSaying {
+    int id;
+    String content;
+    String author;
 }
