@@ -30,8 +30,13 @@ public class App {
                 String strId = command.substring(6);
                 int id = Integer.parseInt(strId);
 
-                deleteWiseSaying(id);
-                System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
+                boolean result = deleteWiseSaying(id);
+
+                if (result) {
+                    System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
+                } else {
+                    System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+                }
             }
         }
     }
@@ -63,7 +68,7 @@ public class App {
         wiseSayingList.add(wiseSaying);
     }
     // [a:0, b:1, c:2]
-    private void deleteWiseSaying(int targetId) {
+    private boolean deleteWiseSaying(int targetId) {
         // wiseSayingList.remove(1); // 1번째 명언 삭제 -> 명언의 번호와 배열의 index가 아무 상관이 없다.
         // 1. 아이디가 1인 명언의 index를 얻는다.
         // 2. 아이디가 1인 명언의 값 자체를 얻는다.
@@ -71,8 +76,10 @@ public class App {
         for (WiseSaying wiseSaying : wiseSayingList) {
             if (wiseSaying.getId() == targetId) {
                 wiseSayingList.remove(wiseSaying);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }
